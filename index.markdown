@@ -100,6 +100,7 @@ Welcome. Type a name in the text box and press go to search for a **single name*
 - Right click anywhere on the page and click `Inspect`, opening the developer tools
 - Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up)
 - You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us, so we have to, sorry
+- If instructed (likely in chrome), type the text "allow pasting" (without the quotes) and hit enter. It's possible that you will not have to do this
 - Copy and paste the following code into the text box at the very bottom of the page, past all of the messages. Press enter. You should see a file called `friendsList.json` downloaded
 
 ```
@@ -121,7 +122,10 @@ Welcome. Type a name in the text box and press go to search for a **single name*
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
 ```
-Source: [https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api](https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api)
 
-- Use the file upload above! It may take a few moments because you have so many friends. The file is never uploaded to a server or anything, it is all handled by your computer so it is safe. Of course, use at your own risk
+- Now you're ready to use the file upload at the top of the page! It may take
+  a few moments because you have so many friends. The file is never uploaded
+  to a server or anything, it is all handled by your computer so it is safe.
+  Of course, use at your own risk
 
+> These instructions have been adapted from: [https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api](https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api)
