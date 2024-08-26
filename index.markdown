@@ -11,7 +11,7 @@ layout: home
 reach out to `maxkatzchristy@gmail.com`. Provide your phone number and I will
 call you to help you make it work. Voting for this election has already started and will end Sept. 3 (the Tuesday after Labor Day)!
 
-1. Log into Facebook and go to your friend list page: [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list)
+1. Log into Facebook and go to your friend list page: [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list){:target="_blank"}
 2. Scroll all the way to the bottom of the page. Keep scrolling until you cannot scroll any further. (This will load all of your friends so you can export them to a file. I know, this is so tedious; you are so popular!)
 3. Right click anywhere on the page and click `Inspect`, opening the developer tools (This might look scary, but hang in there!)
 4. Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up). You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us, but what we're doing keeps all of your data on your computer, so it is very safe. 
