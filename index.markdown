@@ -5,15 +5,50 @@
 layout: home
 ---
 
-Welcome. Type a name in the text box and press go to search for a **single name**, **OR** select Browse and upload a file with a list of names in JSON format and select Browse and upload a file with a list of names in JSON format and press go to search for **many people**.
+## How to see which of your Facebook friends are in Evan's District
+
+> Follow these instructions to export your Facebook friends and use this page
+to see which people are in his district. If you get stuck or have any trouble,
+reach out to `maxkatzchristy@gmail.com`. Provide your phone number and I will
+call you to help you make it work. The election is soon!
+
+1. Go to the friend list page (login to Facebook, if you haven't already): [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list)
+2. Scroll all the way to the bottom of the page. This loads all of your friends so we can export them to a file (I know, this is so tedious, you are so popular)
+3. Right click anywhere on the page and click `Inspect`, opening the developer tools (it might look scary, but hang in there!)
+4. Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up). You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us. What we're doing keeps all of your data on your computer, so it is very safe.
+5. If instructed (likely in chrome), type the text "allow pasting" (without the quotes) and hit enter. You may be able to skip this step, but it won't break anything if you do it anyways.
+6. Copy and paste the following code into the text box at the very bottom of the page, past all of the messages. Press enter. You should see a file called `friendsList.json` downloaded
+```javascript
+var exportObj = [];
+for (var el of document.querySelectorAll('[data-visualcompletion="ignore-dynamic"]')) {
+    var name = el.getAttribute("aria-label");
+    if(name!= null && name != "null"){
+        exportObj.push(name);
+    }else{
+        var a = el.getElementsByTagName("a")[0];
+    }
+}
+
+var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+var downloadAnchorNode = document.createElement('a');
+downloadAnchorNode.setAttribute("href",     dataStr);
+downloadAnchorNode.setAttribute("download", "friendsList.json");
+document.body.appendChild(downloadAnchorNode);
+downloadAnchorNode.click();
+downloadAnchorNode.remove();
+```
+
+7. Now you're ready to see which friends are in Evan's district. The file will
+   be in your Downloads and named `friendsList.json`. Click `Browse...`, and
+   select that file. Then click `Search`. It may take a few moments because you
+   have so many friends. The file is never uploaded to a server or anything,
+   all of your data will stay on your computer. Of course, use at your own risk
 
 > Note: Searches are based solely on first and last name and are not
 necessarily accurate
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
-<form id="my-form">
-    <input id="name" type="text" name="in" placeholder="Full Name" />
-    <br>
+<form id="friends-lookup">
     <input id="friendslist" type="file" />
     <br>
     <button type="submit">Search!</button>
@@ -26,40 +61,38 @@ necessarily accurate
       return new Promise((resolve) => setTimeout(resolve, 10));
     }
 
-    const to_li = (result) => `<li>${result.item["Full Name"]}, age ${result.item.Age}`;
+    const to_li = (result) => `<li>${result.item["Full Name"]}, age ${result.item.Age}</li>`;
     let fuse;
     function processForm(e) {
         if (e.preventDefault) e.preventDefault();
 
         try {
             const files = document.getElementById("friendslist").files;
-            if (files.length > 0) {
-                const fr = new FileReader();
-                fr.readAsText(files[0]);
-                fr.addEventListener(
-                    "load",
-                    async () => {
-                        const friends = JSON.parse(fr.result);
-                        const matches = [];
-                        let i = 0;
-                        for (const friend of friends) {
-                            document.getElementById("output").innerHTML = `Loading... (${Math.round(++i / friends.length * 100)}%)`;
-                            await sleep();
-                            const results = fuse.search(friend);
-                            if (results.length > 0) {
-                                matches.push(results[0]);
-                            }
-                        }
-                        document.getElementById("output").innerHTML = matches.map(to_li).join("");
-                    },
-                    false,
-                );
-            } else {
-                const results = fuse.search(document.getElementById('name').value);
-                document.getElementById("output").innerHTML = to_li(results[0]);
+            if (files.length === 0) {
+                throw new Error("Please select a file to search");
             }
+            const fr = new FileReader();
+            fr.readAsText(files[0]);
+            fr.addEventListener(
+                "load",
+                async () => {
+                    const friends = JSON.parse(fr.result);
+                    const matches = [];
+                    let i = 0;
+                    for (const friend of friends) {
+                        document.getElementById("output").innerHTML = `Searching... (${Math.round(++i / friends.length * 100)}%)`;
+                        await sleep();
+                        const results = fuse.search(friend);
+                        if (results.length > 0) {
+                            matches.push(results[0]);
+                        }
+                    }
+                    document.getElementById("output").innerHTML = matches.map(to_li).join("");
+                },
+                false,
+            );
         } catch (error) {
-            document.getElementById("output").innerHTML = `Sorry messed up: ${error.message}`;
+            document.getElementById("output").innerHTML = `Something went wrong: ${error.message}`;
             console.error(error.message);
         }
 
@@ -67,7 +100,7 @@ necessarily accurate
         return false;
     }
 
-    var form = document.getElementById('my-form');
+    var form = document.getElementById('friends-lookup');
     if (form.attachEvent) {
         form.attachEvent("submit", processForm);
     } else {
@@ -102,39 +135,46 @@ necessarily accurate
     getData();
 </script>
 
-## How to get a JSON file with a list of Facebook friends
-
-- Go to the friend list page: [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list)
-- Scroll all the way to the bottom of the page, loading all of your friends (I know, this is so tedious, you are so popular)
-- Right click anywhere on the page and click `Inspect`, opening the developer tools
-- Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up)
-- You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us, so we have to, sorry
-- If instructed (likely in chrome), type the text "allow pasting" (without the quotes) and hit enter. It's possible that you will not have to do this
-- Copy and paste the following code into the text box at the very bottom of the page, past all of the messages. Press enter. You should see a file called `friendsList.json` downloaded
-
-```
-    var exportObj = [];
-    for (var el of document.querySelectorAll('[data-visualcompletion="ignore-dynamic"]')) {
-        var name = el.getAttribute("aria-label");
-        if(name!= null && name != "null"){
-            exportObj.push(name);
-        }else{
-            var a = el.getElementsByTagName("a")[0];
-        }
-    }
-    
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-    downloadAnchorNode.setAttribute("download", "friendsList.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-```
-
-- Now you're ready to use the file upload at the top of the page! It may take
-  a few moments because you have so many friends. The file is never uploaded
-  to a server or anything, it is all handled by your computer so it is safe.
-  Of course, use at your own risk
-
 > These instructions have been adapted from: [https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api](https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api)
+
+## Search for an individual name
+
+> Not friends on Facebook? Maybe they are stealthy on Facebook and don't use
+their full name? Maybe they are so cool that they don't use Facebook at all!
+Look them up by name here.
+
+<form id="name-lookup">
+    <input id="name" type="text" name="in" placeholder="Full Name" />
+    <br>
+    <button type="submit">Search!</button>
+</form>
+
+<p id="name-output"></p>
+
+<script>
+    function processForm(e) {
+        if (e.preventDefault) e.preventDefault();
+
+        try {
+            const results = fuse.search(document.getElementById('name').value);
+            if (results.length === 0) {
+                throw new Error("They are probably not in the district, name not matched");
+            }
+            document.getElementById("name-output").innerHTML = `${results[0].item["Full Name"]}, age ${results[0].item.Age}`;
+        } catch (error) {
+            document.getElementById("name-output").innerHTML = `Sorry messed up: ${error.message}`;
+            console.error(error.message);
+        }
+
+        // You must return false to prevent the default form behavior
+        return false;
+    }
+
+    var form = document.getElementById('name-lookup');
+    if (form.attachEvent) {
+        form.attachEvent("submit", processForm);
+    } else {
+        form.addEventListener("submit", processForm);
+    }
+</script>
+
