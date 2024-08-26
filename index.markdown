@@ -98,7 +98,7 @@ Welcome. Type a name in the text box and press go to search for a **single name*
 - Go to the friend list page: [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list)
 - Scroll all the way to the bottom of the page, loading all of your friends (I know, this is so tedious, you are so popular)
 - Right click anywhere on the page and click `Inspect`, opening the developer tools
-- Click on `Console` (it should be one of the tabs next to `Inspector` in the popup that has just come up)
+- Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up)
 - You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us, so we have to, sorry
 - Copy and paste the following code into the text box at the very bottom of the page, past all of the messages. Press enter. You should see a file called `friendsList.json` downloaded
 
