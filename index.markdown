@@ -7,6 +7,9 @@ layout: home
 
 Welcome. Type a name in the text box and press go to search for a **single name**, **OR** select Browse and upload a file with a list of names in JSON format and select Browse and upload a file with a list of names in JSON format and press go to search for **many people**.
 
+> Note: Searches are based solely on first and last name and are not
+necessarily accurate
+
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 <form id="my-form">
     <input id="name" type="text" name="in" placeholder="Full Name" />
@@ -19,28 +22,34 @@ Welcome. Type a name in the text box and press go to search for a **single name*
 <ul id="output"></ul>
 
 <script>
-    const to_li = (result) => `<li>${result.item["Full Name"]}, age ${result.item.Age} (${((1 - result.score) * 100).toPrecision(4)}% accuracy)</li>`;
+    async function sleep() {
+      return new Promise((resolve) => setTimeout(resolve, 10));
+    }
+
+    const to_li = (result) => `<li>${result.item["Full Name"]}, age ${result.item.Age}`;
     let fuse;
     function processForm(e) {
         if (e.preventDefault) e.preventDefault();
 
         try {
-            document.getElementById("output").innerHTML = "Loading..."
             const files = document.getElementById("friendslist").files;
             if (files.length > 0) {
                 const fr = new FileReader();
                 fr.readAsText(files[0]);
                 fr.addEventListener(
                     "load",
-                    () => {
+                    async () => {
                         const friends = JSON.parse(fr.result);
                         const matches = [];
-                        friends.forEach(friend => {
+                        let i = 0;
+                        for (const friend of friends) {
+                            document.getElementById("output").innerHTML = `Loading... (${Math.round(++i / friends.length * 100)}%)`;
+                            await sleep();
                             const results = fuse.search(friend);
                             if (results.length > 0) {
                                 matches.push(results[0]);
                             }
-                        });
+                        }
                         document.getElementById("output").innerHTML = matches.map(to_li).join("");
                     },
                     false,
