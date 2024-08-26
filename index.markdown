@@ -117,12 +117,10 @@ call you to help you make it work. Voting for this election has already started 
                 includeScore: true,
                 // Search in `author` and in `tags` array
                 keys: ['Full Name'],
-                threshold: 0.05,
+                threshold: 0.2,
             }
 
             fuse = new Fuse(list, options)
-
-            const result = fuse.search('JEAN MASON')
         } catch (error) {
             document.getElementById("output").innerHTML = `Sorry messed up: ${error.message}`;
             console.error(error.message);
@@ -159,7 +157,7 @@ Look them up by name here.
             if (results.length === 0) {
                 throw new Error("They are probably not in the district, name not matched");
             }
-            document.getElementById("name-output").innerHTML = `${results[0].item["Full Name"]}, age ${results[0].item.Age}`;
+            document.getElementById("name-output").innerHTML = results.slice(0, 15).map(to_li).join("");
         } catch (error) {
             document.getElementById("name-output").innerHTML = `Sorry messed up: ${error.message}`;
             console.error(error.message);
