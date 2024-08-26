@@ -19,23 +19,23 @@ call you to help you make it work. The election is soon!
 5. If instructed (likely in chrome), type the text "allow pasting" (without the quotes) and hit enter. You may be able to skip this step, but it won't break anything if you do it anyways.
 6. Copy and paste the following code into the text box at the very bottom of the page, past all of the messages. Press enter. You should see a file called `friendsList.json` downloaded
 ```javascript
-var exportObj = [];
-for (var el of document.querySelectorAll('[data-visualcompletion="ignore-dynamic"]')) {
-    var name = el.getAttribute("aria-label");
-    if(name!= null && name != "null"){
-        exportObj.push(name);
-    }else{
-        var a = el.getElementsByTagName("a")[0];
+    var exportObj = [];
+    for (var el of document.querySelectorAll('[data-visualcompletion="ignore-dynamic"]')) {
+        var name = el.getAttribute("aria-label");
+        if(name!= null && name != "null"){
+            exportObj.push(name);
+        }else{
+            var a = el.getElementsByTagName("a")[0];
+        }
     }
-}
 
-var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
-var downloadAnchorNode = document.createElement('a');
-downloadAnchorNode.setAttribute("href",     dataStr);
-downloadAnchorNode.setAttribute("download", "friendsList.json");
-document.body.appendChild(downloadAnchorNode);
-downloadAnchorNode.click();
-downloadAnchorNode.remove();
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", "friendsList.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
 ```
 
 7. Now you're ready to see which friends are in Evan's district. The file will
