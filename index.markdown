@@ -5,14 +5,14 @@
 layout: home
 ---
 
-## See which of your Facebook friends are registered to vote in Evan's district
+## See which of your Facebook friends are registered to vote in [Evan](https://www.evanforcambridge.com/){:target="blank"}'s district
 
-> Follow these instructions to see which of your Facebook friends vote in Evan's district. If you get stuck or have any trouble,
+> Follow these instructions to see which of your Facebook friends vote in [Evan](https://www.evanforcambridge.com/){:target="blank"}'s district. If you get stuck or have any trouble,
 reach out to `maxkatzchristy@gmail.com`. Provide your phone number and I will
 call you to help you make it work. Voting for this election has already started and will end Sept. 3 (the Tuesday after Labor Day)!
 
 1. Log into Facebook and go to your friend list page: [https://www.facebook.com/friends/list](https://www.facebook.com/friends/list){:target="_blank"}
-> Note: This has been tested in Chrome, Firefox, and Chromium. On safari this additional step must be taken before starting: [https://support.apple.com/guide/safari/use-the-developer-tools-in-the-develop-menu-sfri20948/mac](https://support.apple.com/guide/safari/use-the-developer-tools-in-the-develop-menu-sfri20948/mac). It may also work on other browsers.
+> Note: This has been tested in Chrome, Firefox, and Chromium. On safari this additional step must be taken before starting: [https://support.apple.com/guide/safari/use-the-developer-tools-in-the-develop-menu-sfri20948/mac](https://support.apple.com/guide/safari/use-the-developer-tools-in-the-develop-menu-sfri20948/mac){:target="blank"}. It may also work on other browsers.
 2. Scroll all the way to the bottom of the page. Keep scrolling until you cannot scroll any further. (This will load all of your friends so you can export them to a file. I know, this is so tedious; you are so popular!)
 3. Right click anywhere on the page and click `Inspect`, opening the developer tools (This might look scary, but hang in there!)
 4. Click on `Console` (it should be one of the tabs next to `Elements` or `Inspector` in the popup that has just come up). You're going to see it say things like *STOP*, etc. Unfortunately Facebook doesn't make this easy for us, but what we're doing keeps all of your data on your computer, so it is very safe. 
@@ -38,7 +38,7 @@ call you to help you make it work. Voting for this election has already started 
     downloadAnchorNode.remove();
 ```
 
-7. Now you're ready to see which friends are in Evan's district. The file will
+7. Now you're ready to see which friends are in [Evan](https://www.evanforcambridge.com/){:target="blank"}'s district. The file will
    be in your `Downloads` folder and named `friendsList.json`. Click `Browse...` below, and
    select that file. Then click `Search`. This search may take a few moments because you
    have so many friends. The file is never uploaded to a server or anything,
@@ -133,13 +133,16 @@ call you to help you make it work. Voting for this election has already started 
 > Note: Searches are based solely on first and last name and are not
 necessarily accurate nor complete.
 
-> These instructions have been adapted from: [https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api](https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api)
+> These instructions have been adapted from: [https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api](https://stackoverflow.com/questions/50095522/how-to-get-whole-facebook-friends-list-from-api){:target="blank"}
 
 ## Search for an individual name
 
 > Not friends on Facebook? Maybe they are stealthy on Facebook and don't use
 their full name? Maybe they are so cool that they don't use Facebook at all!
 Look them up by name here.
+
+> Reference the [Evan](https://www.evanforcambridge.com/){:target="blank"}'s district map here:
+[https://www.evanforcambridge.com/#district-map](https://www.evanforcambridge.com/#district-map){:target="blank"}
 
 <form id="name-lookup">
     <input id="name" type="text" name="in" placeholder="Full Name" />
@@ -176,3 +179,14 @@ Look them up by name here.
     }
 </script>
 
+## Next Steps
+
+Reach out to your contacts!
+
+Communicate in the way you normally communicate whether that's text, email,
+phone call, etc. Let them know about the election, maybe send them the intro
+video about the state legislature and why you're supporting [Evan MacKay](https://www.evanforcambridge.com/){:target="blank"}: [www.actonmass.org](www.actonmass.org){:target="blank"}
+
+Here is a document from the campaign on how to reach out to your network with a tool called Reach: [https://docs.google.com/document/d/1axFtGJwAm6kTv-H77PICL_zeNBc8zKCqQyW_rNdpZQc/edit](https://docs.google.com/document/d/1axFtGJwAm6kTv-H77PICL_zeNBc8zKCqQyW_rNdpZQc/edit){:target="blank"}
+
+Use campaign key / code for reach: `CRHXJD`
