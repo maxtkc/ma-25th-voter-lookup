@@ -53,6 +53,8 @@ call you to help you make it work. Voting for this election has already started 
 
 <ul id="output"></ul>
 
+<a id="download-csv" style="display: none" download="friendsToContact.csv">Download CSV</a>
+
 <script>
     async function sleep() {
       return new Promise((resolve) => setTimeout(resolve, 10));
@@ -85,6 +87,10 @@ call you to help you make it work. Voting for this election has already started 
                         }
                     }
                     document.getElementById("output").innerHTML = matches.map(to_li).join("");
+
+                    download_csv = document.getElementById("download-csv")
+                    download_csv.href = "data:text/csv;charset=utf-8," + encodeURIComponent("Full Name,Age\n" + matches.map(match => `${match.item["Full Name"]},${match.item.Age}`).join("\n"));
+                    download_csv.style.display = "inline";
                 },
                 false,
             );
